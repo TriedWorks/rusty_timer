@@ -1,6 +1,6 @@
 [package]
 name = "rusty_timer"
-version = "1.0.0"
+version = "1.0.1"
 authors = ["Sebastian <Sebastian@Strobl.net>"]
 edition = "2018"
 repository = "https://github.com/TriedWorks/rusty_timer"

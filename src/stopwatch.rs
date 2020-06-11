@@ -28,7 +28,7 @@ impl Stopwatch {
 
     }
 
-    pub fn start(&mut self) {
+    pub fn restart(&mut self) {
         self.duration = Duration::new(0, 0);
         self.instant = Instant::now();
         self.state = StopwatchState::Running;
@@ -79,7 +79,7 @@ impl SystemStopwatch {
 
     }
 
-    pub fn start(&mut self) {
+    pub fn restart(&mut self) {
         self.duration = Duration::new(0, 0);
         self.instant = SystemTime::now();
         self.state = StopwatchState::Running;

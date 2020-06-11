@@ -1,10 +1,12 @@
 use std::time::{Duration, Instant, SystemTime};
 
+/// A internal enum to manage stopwatch stopping
 enum StopwatchState {
     Running,
     Paused,
 }
 
+/// The stopwatch uses the std::time Instant and Duration
 pub struct Stopwatch {
     state: StopwatchState,
     duration: Duration,
@@ -16,6 +18,7 @@ impl Stopwatch {
         Self::default()
     }
 
+    /// get the elapsed time since last restart
     pub fn elapsed(&self) -> Duration {
         match self.state {
             StopwatchState::Running => {
@@ -28,17 +31,20 @@ impl Stopwatch {
 
     }
 
+    /// restart the stopwatch
     pub fn restart(&mut self) {
         self.duration = Duration::new(0, 0);
         self.instant = Instant::now();
         self.state = StopwatchState::Running;
     }
 
+    /// pause the stopwatch
     pub fn pause(&mut self) {
         self.duration += self.instant.elapsed();
         self.state = StopwatchState::Paused;
     }
 
+    /// unpause the stopwatch
     pub fn unpause(&mut self) {
         self.instant = Instant::now();
         self.state = StopwatchState::Running;
@@ -55,7 +61,9 @@ impl Default for Stopwatch {
     }
 }
 
-
+/// This stopwatch is the same as the normal stopwatch
+/// but instead of using std::Instance, it uses std::SystemTime
+/// See normal Stopwatch for documentation
 pub struct SystemStopwatch {
     state: StopwatchState,
     duration: Duration,

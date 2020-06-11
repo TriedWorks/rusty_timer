@@ -69,7 +69,7 @@ mod tests {
         let mut timer = Timer::new();
         let mut x = 0;
         loop {
-            timer.set_delta_time();
+            timer.update_delta_time();
             println!("delta_time: {:?}", timer.delta_time());
 
             x += 1;
@@ -81,12 +81,13 @@ mod tests {
 
     #[test]
     fn test_fixed_update() {
+        use crate::{Timer};
         let mut timer = Timer::new();
         timer.set_fixed_interval(Duration::from_secs_f32(1.0 / 120.0));
         let mut fixed_update_counter: u32 = 0;
         loop {
-            timer.update_time_since_last_fixed();
-            timer.set_delta_time();
+            timer.update_delta_time();
+            timer.update_time_since_last_fixed_update();
 
             if timer.should_fixed_update() {
                 fixed_update_counter += 1;

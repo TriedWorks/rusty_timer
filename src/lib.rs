@@ -85,9 +85,10 @@ mod tests {
         let mut timer = Timer::new();
         timer.set_fixed_interval(Duration::from_secs_f32(1.0 / 120.0));
         let mut fixed_update_counter: u32 = 0;
+
         loop {
             timer.update_delta_time();
-            timer.update_time_since_last_fixed_update();
+            timer.update_fixed_time();
 
             if timer.should_fixed_update() {
                 fixed_update_counter += 1;
@@ -97,7 +98,6 @@ mod tests {
 
             if timer.time_since_start() >= Duration::from_secs_f32(5.0) {
                 println!("time: {:?}", timer.time_since_start());
-                println!("fixed_updates expected: {:?}", timer.time_since_start() * 120);
                 println!("fixed_updates amount: {}", fixed_update_counter);
                 assert_eq!(fixed_update_counter, 120 * 5);
                 break

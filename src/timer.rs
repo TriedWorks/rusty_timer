@@ -14,6 +14,9 @@ pub struct Timer {
     should_fixed: bool,
 }
 
+unsafe impl Send for Timer {}
+unsafe impl Sync for Timer {}
+
 impl Timer {
     /// Create a new timer object
     /// time since last fixed update is set to a high number on creation
